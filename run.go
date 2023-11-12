@@ -74,7 +74,7 @@ type RunRequest struct {
 	Model        *string `json:"model,omitempty"`
 	Instructions *string `json:"instructions,omitempty"`
 	Tools        []Tool  `json:"tools,omitempty"`
-	Metadata     map[string]any
+	Metadata map[string]any `json:"metadata,omitempty"
 }
 
 type RunModifyRequest struct {

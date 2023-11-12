@@ -131,6 +131,7 @@ func TestRun(t *testing.T) {
 					Object:    "run",
 					CreatedAt: 1234567890,
 					Status:    openai.RunStatusQueued,
+					Metadata:  request.Metadata,
 				})
 				fmt.Fprintln(w, string(resBytes))
 			} else if r.Method == http.MethodGet {
@@ -172,6 +173,9 @@ func TestRun(t *testing.T) {
 
 	_, err := client.CreateRun(ctx, threadID, openai.RunRequest{
 		AssistantID: assistantID,
+		Metadata: map[string]any{
+			"key": "value",
+		},
 	})
 	checks.NoError(t, err, "CreateRun error")
 
@@ -207,6 +211,9 @@ func TestRun(t *testing.T) {
 	_, err = client.CreateThreadAndRun(ctx, openai.CreateThreadAndRunRequest{
 		RunRequest: openai.RunRequest{
 			AssistantID: assistantID,
+			Metadata: map[string]any{
+				"key": "value",
+			},
 		},
 		Thread: openai.ThreadRequest{
 			Messages: []openai.ThreadMessage{
